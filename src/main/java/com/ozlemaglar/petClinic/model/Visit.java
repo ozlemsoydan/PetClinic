@@ -1,16 +1,12 @@
 package com.ozlemaglar.petClinic.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -22,13 +18,11 @@ import java.time.LocalDate;
 @Table(name = "visits")
 public class Visit extends BaseEntity{
 
-    @Column(name = "visit_date")
+    @Column(name = "visit_date", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate visitDate;
 
-    @Column(name = "description")
-    @NotNull
-    @Lob
+    @Column(name = "description", nullable = false)
     private String description;
 
 }

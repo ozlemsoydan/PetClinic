@@ -1,12 +1,11 @@
 package com.ozlemaglar.petClinic.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,21 +16,18 @@ import javax.validation.constraints.NotNull;
 @Table(name = "user")
 
 
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
-    @Column(name = "userName")
-    @NotNull
+    @Column(name = "userName", nullable = false)
     private String userName;
 
-    @Column(name = "password")
-    @NotNull
+    @Column(name = "password", nullable = false)
     private char password;
 
-    @Column(name = "email")
-    @NotNull
-    private  String email;
-
-
-
-
+    @Column(name = "email", nullable = false)
+    private String email;
 }
+
+
+
+

@@ -1,12 +1,13 @@
 package com.ozlemaglar.petClinic.model;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
+
 import java.util.Set;
 
 @AllArgsConstructor
@@ -16,22 +17,20 @@ import java.util.Set;
 
 @Entity
 @Table(name = "vet")
-public class Vet extends BaseEntity{
+public class Vet extends BaseEntity {
 
-    @Column(name = "name")
-    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "surname")
-    @NotNull
     private String surname;
 
     @Column(name = "phoneNumber")
-    @NotNull
     private int phoneNumber;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private User user_id;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "vet_specialties", joinColumns = @JoinColumn(name = "vet_id"),

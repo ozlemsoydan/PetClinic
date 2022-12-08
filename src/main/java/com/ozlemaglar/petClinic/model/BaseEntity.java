@@ -3,17 +3,16 @@ package com.ozlemaglar.petClinic.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 
-@MappedSuperclass
 public class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "createdDate")
+    @Column(name = "createdDate", updatable = false)
     private Date createdDate;
 
     @Column(name = "updatedDate")

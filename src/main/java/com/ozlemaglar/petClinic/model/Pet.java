@@ -1,12 +1,11 @@
 package com.ozlemaglar.petClinic.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -20,8 +19,7 @@ import java.util.Set;
 @Table(name = "pets")
 public class Pet extends BaseEntity{
 
-    @Column(name = "birthday")
-    @NotNull
+    @Column(name = "birthday", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date birthday;
 

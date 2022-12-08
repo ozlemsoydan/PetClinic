@@ -1,12 +1,12 @@
 package com.ozlemaglar.petClinic.model;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,24 +19,18 @@ import java.util.List;
 @Table(name = "owner")
 public class Owner extends BaseEntity {
 
-    @Column(name = "name")
-    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
-
-    @Column(name = "surname")
-    @NotNull
+    @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "phoneNumber")
-    @NotNull
+    @Column(name = "phoneNumber", nullable = false)
     private int phoneNumber;
 
     @Column(name = "address")
     private String address;
 
-
-    @NotNull
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id")
     private List<Pet> pets = new ArrayList<>();
