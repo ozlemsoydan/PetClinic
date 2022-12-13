@@ -1,4 +1,4 @@
-package com.ozlemaglar.petClinic.model;
+package com.ozlemaglar.petClinic.model.entity;
 
 import javax.persistence.*;
 

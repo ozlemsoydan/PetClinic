@@ -1,4 +1,4 @@
-package com.ozlemaglar.petClinic.model;
+package com.ozlemaglar.petClinic.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +21,8 @@ public class BaseEntity implements Serializable {
 
     @Column(name = "updatedDate")
     private Date updatedDate;
+
+    @Column(name = "updatedDate")
+    private String createBy;
 
 }

@@ -1,4 +1,4 @@
-package com.ozlemaglar.petClinic.model;
+package com.ozlemaglar.petClinic.model.entity;
 
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,14 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 
 @Entity
-@Table(name = "specialty")
-public class Specialty {
+@Table(name = "type")
+public class Type {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
