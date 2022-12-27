@@ -1,12 +1,11 @@
-package com.ozlemaglar.petClinic.sevice;
+package com.ozlemaglar.petClinic.service;
 
-import com.ozlemaglar.petClinic.model.dto.OwnerDto;
-import com.ozlemaglar.petClinic.model.entity.Owner;
+import com.ozlemaglar.petClinic.dto.OwnerDto;
+import com.ozlemaglar.petClinic.entity.Owner;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public interface IOwnerService {
 
