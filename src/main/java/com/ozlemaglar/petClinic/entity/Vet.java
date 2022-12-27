@@ -1,10 +1,7 @@
-package com.ozlemaglar.petClinic.model.entity;
+package com.ozlemaglar.petClinic.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -17,7 +14,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "vet")
-public class Vet extends BaseEntity {
+public class Vet {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;

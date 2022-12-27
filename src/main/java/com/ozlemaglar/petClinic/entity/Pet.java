@@ -1,23 +1,24 @@
-package com.ozlemaglar.petClinic.model.entity;
+package com.ozlemaglar.petClinic.entity;
 
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+
 
 @Entity
 @Table(name = "pets")
-public class Pet extends BaseEntity{
+public class Pet {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "birthday", nullable = false)
     @Temporal(TemporalType.DATE)
@@ -29,7 +30,7 @@ public class Pet extends BaseEntity{
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "pet_id")
-    @OrderBy("updatedDate ASC")
+//    @OrderBy("updatedDate ASC")
     private Set<Visit> visits = new LinkedHashSet<>();
 
 

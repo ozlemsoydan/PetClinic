@@ -1,10 +1,7 @@
-package com.ozlemaglar.petClinic.model.entity;
+package com.ozlemaglar.petClinic.entity;
 
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -15,8 +12,12 @@ import java.time.LocalDate;
 @Setter
 
 @Entity
-@Table(name = "visits")
-public class Visit extends BaseEntity{
+@Table(name = "visit")
+public class Visit {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "visit_date", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")

@@ -1,11 +1,8 @@
-package com.ozlemaglar.petClinic.model.entity;
+package com.ozlemaglar.petClinic.entity;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,10 +10,14 @@ import lombok.Setter;
 @Setter
 
 @Entity
-@Table(name = "user")
+@Table(name = "custom_user")
 
 
-public class User extends BaseEntity {
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "userName", nullable = false)
     private String userName;
