@@ -2,10 +2,9 @@ package com.ozlemaglar.petClinic.service;
 
 import com.ozlemaglar.petClinic.dto.OwnerDto;
 import com.ozlemaglar.petClinic.entity.Owner;
+import com.ozlemaglar.petClinic.result.Result;
 import org.springframework.http.ResponseEntity;
-
 import java.util.List;
-import java.util.Map;
 
 public interface IOwnerService {
 
@@ -17,9 +16,9 @@ public interface IOwnerService {
 
     public List<OwnerDto> getAllOwner();
 
-    public OwnerDto getOwnerById(long id);
+    public OwnerDto findOwner(String findBy);
 
     public OwnerDto updateOwner(long id, OwnerDto ownerDto);
 
-    public Map<String, Boolean> deleteOwner(Long id);
+    public Result deleteOwner(long id);
 }

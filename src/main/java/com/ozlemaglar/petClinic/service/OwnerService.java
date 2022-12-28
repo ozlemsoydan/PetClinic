@@ -2,13 +2,18 @@ package com.ozlemaglar.petClinic.service;
 
 import com.ozlemaglar.petClinic.dto.OwnerDto;
 import com.ozlemaglar.petClinic.entity.Owner;
+import com.ozlemaglar.petClinic.entity.Pet;
+import com.ozlemaglar.petClinic.entity.Type;
 import com.ozlemaglar.petClinic.repository.OwnerRepository;
+import com.ozlemaglar.petClinic.result.Result;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 @Service
@@ -41,7 +46,7 @@ public class OwnerService implements IOwnerService {
 //        owner.setCreatedDate(new Date());
         // owner.setCreateBy();
         ownerRepository.save(owner);
-        return new  ResponseEntity(HttpStatus.CREATED) ;
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @Override
@@ -57,15 +62,32 @@ public class OwnerService implements IOwnerService {
             ownerDtoList.add(ownerDto);
         }
         return ownerDtoList;
-
     }
 
     @Override
-    public OwnerDto getOwnerById(long id) {
-        Optional<Owner> owner = ownerRepository.findById(id);
+    public OwnerDto findOwner(String findBy) {
+        OwnerDto ownerDto = new OwnerDto();
 
-        OwnerDto ownerDto = entityToDto(owner.get());
-        return ownerDto;
+        //findById
+        if (findBy == ownerDto.getId().toString()) {
+            Optional<Owner> owner1 = (ownerRepository.findById(ownerDto.getId()));
+            Owner owner = dtoToEntity(ownerDto);
+            return ownerDto;
+        }
+        //findBySurname
+        else if (findBy == ownerDto.getSurname()) {
+            Page<Owner> owner1 = ownerRepository.findBySurname(ownerDto.getSurname());
+            Owner owner = dtoToEntity(ownerDto);
+            return ownerDto;
+        }
+        //findByPetTypes
+        else if (findBy == ownerDto.getPets().toString()) {
+            List<Type> pType = ownerRepository.findPetTypes();
+            return (OwnerDto) pType;
+        } else {
+            throw new EntityNotFoundException("Hatalı sorgu");
+        }
+
     }
 
 
@@ -89,14 +111,25 @@ public class OwnerService implements IOwnerService {
     }
 
     @Override
-    public Map<String, Boolean> deleteOwner(Long id) {
-        //find Entity
-        Optional<Owner> owner= ownerRepository.findById(id);
+    public Result deleteOwner(long id) {
 
-        //Object delete
-        ownerRepository.delete(owner.get());
-        Map<String, Boolean> response=new HashMap<>();
-        response.put("silindi",Boolean.TRUE);
-        return response;
+        Result data;
+
+        Optional<Owner> owner = ownerRepository.findById(id);
+
+
+        if (!owner.isPresent()) {
+            data = new Result(null, "Not found", HttpStatus.NOT_FOUND.value());
+
+        } else {
+
+            try {
+                ownerRepository.delete(owner.get());
+                data = new Result(null, "deleted owner", HttpStatus.OK.value());
+            } catch (Exception e) {
+                data = new Result(null, e.getMessage(), HttpStatus.FAILED_DEPENDENCY.value());
+            }
+        }
+        return data;
     }
 }
